@@ -17,7 +17,10 @@ def iniciar_app():
             if profesor.salir:
                 iniciar_app()
         elif respuesta == 2:
-            pass
+            alumno = alumnos_controller()
+            alumno.menu()
+            if alumno.salir:
+                iniciar_app()
         elif respuesta == 3:
             curso = Cursos_controller()
             curso.menu()
