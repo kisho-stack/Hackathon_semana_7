@@ -1,7 +1,4 @@
-from classes.alumno import alumno
-from classes.salon import salon
-from classes.notas import notas
-from classes.malla import malla
+from classes.alumno import Alumno
 from helpers.menu import Menu
 from helpers.helper import print_table, input_data, pregunta
 
@@ -56,13 +53,11 @@ class alumnos_controller():
 
             if alumno:
                 if pregunta("¿Deseas dar mantenimiento a la lista de alumnos?"):
-                    opciones = ['Asignar salon', 'Editar alumno', 'Eliminar alumno', 'Salir']
+                    opciones = ['Editar alumno', 'Eliminar alumno', 'Salir']
                     respuesta = Menu(opciones).show()
                     if respuesta == 1:
-                        self.asignar_salon(id_alumno, alumno)
-                    elif respuesta == 2:
                         self.editar_alumno(id_alumno)
-                    elif respuesta == 3:
+                    elif respuesta == 2:
                         self.eliminar_alumno(id_alumno)
         except Exception as e:
             print(f'{str(e)}')

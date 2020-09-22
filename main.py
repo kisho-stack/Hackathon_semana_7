@@ -1,6 +1,7 @@
 from helpers.menu import Menu
 from controllers.profesores_controller import Profesores_controller
 from controllers.cursos_controller import Cursos_controller
+from controllers.alumnos_controller import alumno_controller
 
 def iniciar_app():
     try:
