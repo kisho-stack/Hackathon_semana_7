@@ -130,3 +130,9 @@ dmypy.json
 
 # venv
 .myenv/
+
+# venvchris
+.myenvchris/
+
+# gitignore
+.gitignore

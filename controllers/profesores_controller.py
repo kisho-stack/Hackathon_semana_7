@@ -56,8 +56,8 @@ class Profesores_controller:
             print(print_table(profesor, ['ID', 'Nombre', 'Edad', 'Correo']))
 
             if profesor:
-                if pregunta("¿Deseas dar mantenimiento al curso?"):
-                    opciones = ['Asignar curso', 'Editar curso', 'Eliminar curso', 'Salir']
+                if pregunta(f"¿Deseas dar mantenimiento al registro profesor '{profesor[1]}'?"):
+                    opciones = ['Asignar curso', 'Editar profesor', 'Eliminar profesor', 'Salir']
                     respuesta = Menu(opciones).show()
                     if respuesta == 1:
                         self.asignar_curso(id_profesor, profesor)
