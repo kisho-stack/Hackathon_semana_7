@@ -4,10 +4,9 @@ from helpers.helper import print_table, input_data, pregunta
 
 class alumnos_controller():
     def __init__(self):
-        self.alumno = alumno()
+        self.alumno = Alumno()
         self.salir = False
 
-        pass
     def menu(self):
         while True:
             try:
@@ -77,8 +76,7 @@ class alumnos_controller():
         =================================
         ''')
         self.listar_alumnos()
-    def asignar_salon(self):
-        pass
+
     def editar_alumno(self, id_alumno):
         nombre = input_data("Ingrese el nuevo nombre del alumno >> ")
         edad = input_data("Ingrese la nueva edad del alumno >> ")
