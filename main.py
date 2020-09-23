@@ -1,7 +1,11 @@
 from helpers.menu import Menu
 from controllers.profesores_controller import Profesores_controller
 from controllers.cursos_controller import Cursos_controller
+<<<<<<< HEAD
 from controllers.alumnos_controller import alumnos_controller
+=======
+from controllers.periodo_controller import Periodo_controller
+>>>>>>> 0f9d3948475429dbe94709735b904987e0c6536e
 
 def iniciar_app():
     try:
@@ -28,7 +32,10 @@ def iniciar_app():
             if curso.salir:
                 iniciar_app()
         elif respuesta == 4:
-            pass
+            periodo = Periodo_controller()
+            periodo.menu()
+            if periodo.salir:
+                iniciar_app()
         elif respuesta == 5:
             pass
         elif respuesta == 6:
