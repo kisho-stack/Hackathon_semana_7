@@ -6,11 +6,7 @@ class Conexion:
     def __init__(self, table_name):
         self.table_name = table_name
         self.db = connect(host='127.0.0.1', 
-<<<<<<< HEAD
-                    user='postgres', password='flormilagros', database='sistema_colegio')
-=======
-                    user='postgres', password='Christian1304', database='sistema_colegio')
->>>>>>> 0f9d3948475429dbe94709735b904987e0c6536e
+                    user='postgres', password='jorge', database='sistema_colegio')
         self.cursor = self.db.cursor()
 
 

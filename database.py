@@ -61,6 +61,18 @@ class Database:
             );
         '''
         conn.ejecutar_sentencia(create_table_query)
+        
+    def crear_profesor_salon(self):
+        create_table_query = '''
+            CREATE TABLE IF NOT EXISTS  profesor_salon(
+                id_profesor_salon SERIAL,
+                id_profesor integer NOT NULL,
+                id_salon integer NOT NULL,
+                CONSTRAINT profesor_salon_pkey PRIMARY KEY (id_profesor_salon)
+            );
+        '''
+        conn.ejecutar_sentencia(create_table_query)
+
 
     def crear_profesores(self):
         create_table_query = '''
@@ -73,17 +85,42 @@ class Database:
             );
         '''
         conn.ejecutar_sentencia(create_table_query)
+        
+    def crear_alumnos(self):
+        create_table_query = '''
+            CREATE TABLE IF NOT EXISTS  alumnos(
+                alumno_id SERIAL,
+                nombres character varying(150) COLLATE pg_catalog."default",
+                edad integer,
+                correo character varying(150) COLLATE pg_catalog."default",
+                CONSTRAINT alumnos_pkey PRIMARY KEY (alumno_id)
+            );
+        '''
+        conn.ejecutar_sentencia(create_table_query)
 
     def crear_salones(self):
         create_table_query = '''
             CREATE TABLE IF NOT EXISTS  salones(
                 id_salon SERIAL,
+                grado_salon character varying(150) NOT NULL,
                 nombre_salon character varying(150) COLLATE pg_catalog."default" NOT NULL,
                 CONSTRAINT salones_pkey PRIMARY KEY (id_salon)
             );
         '''
         conn.ejecutar_sentencia(create_table_query)
-
+    def insert_salones(self):
+        create_table_query ='''
+            INSERT INTO salones (
+                id_salon,grado_salon,nombre_salon
+            )
+            VALUES (1,'1ro Primaria','Esperanza'),(2,'2do Primaria','Amor'),(3,'3ro Primaria','Gratitud'),
+                   (4,'4to Primaria','Fuerza'),(5,'5to Primaria','Honor'),(6,'6to Primaria','Honor'),
+                   (7,'1ro Secundaria','Responsabilidad'),(8,'2do Secundaria','Respeto'),(9,'3ro Secundaria','Libertad'),
+                   (10,'4to Secundaria','Justicia'),(11,'5to Secundaria','Honestidad')
+            
+        '''
+        conn.ejecutar_sentencia(create_table_query)    
+    
 
 conn = Conexion('sistema_colegio')
 db= Database(conn)
@@ -92,5 +129,8 @@ db.crear_malla_curricular()
 db.crear_notas()
 db.crear_periodo_escolar()
 db.crear_profesor_curso()
+db.crear_profesor_salon()
 db.crear_profesores()
+db.crear_alumnos()
 db.crear_salones()
+db.insert_salones()

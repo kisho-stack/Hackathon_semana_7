@@ -3,12 +3,16 @@ from classes.curso import Curso
 from classes.profesor_curso import Profesor_curso
 from helpers.menu import Menu
 from helpers.helper import print_table, input_data, pregunta
+from classes.salon import Salon
+from classes.profesor_salon import Profesor_salon
 
 class Profesores_controller:
     def __init__(self):
         self.profesor = Profesor()
         self.curso = Curso()
         self.profesor_curso = Profesor_curso()
+        self.salon = Salon()
+        self.profesor_salon = Profesor_salon()
         self.salir = False
 
     def menu(self):
@@ -57,13 +61,15 @@ class Profesores_controller:
 
             if profesor:
                 if pregunta(f"¿Deseas dar mantenimiento al registro profesor '{profesor[1]}'?"):
-                    opciones = ['Asignar curso', 'Editar profesor', 'Eliminar profesor', 'Salir']
+                    opciones = ['Asignar curso','Asignar salon','Editar profesor', 'Eliminar profesor', 'Salir']
                     respuesta = Menu(opciones).show()
                     if respuesta == 1:
                         self.asignar_curso(id_profesor, profesor)
                     elif respuesta == 2:
-                        self.editar_profesor(id_profesor)
+                        self.asignar_salon(id_profesor, profesor)
                     elif respuesta == 3:
+                        self.editar_profesor(id_profesor)
+                    elif respuesta == 4:
                         self.eliminar_profesor(id_profesor)
         except Exception as e:
             print(f'{str(e)}')
@@ -116,11 +122,12 @@ class Profesores_controller:
         print(f'\n Asignación de cursos para el profesor : {profesor[1]}')
         print('''
             ============================
-                Cursos disponibles
+                Curso disponibles
             ============================
         ''')
         cursos = self.curso.obtener_cursos('curso_id')
         cursos_disponibles = []
+        
         if cursos:
             for curso in cursos:
                 id_curso = curso[0]
@@ -155,6 +162,56 @@ class Profesores_controller:
             print('''
                 ==============================
                     Nuevo curso asignado !
+                ==============================
+            ''')
+            
+    def asignar_salon(self, id_profesor, profesor):
+        print(f'\n Asignación de salones para el profesor : {profesor[1]}')
+        print('''
+            ============================
+                Salones disponibles
+            ============================
+        ''')
+        salon = self.salon.obtener_salones('id_salon')
+        salon_disponibles = []
+        
+        if salon:
+            for salones in salon:
+                id_salon = salones[0]
+                grado_salon = salones[1]
+                nombre_salon = salones[2]
+                salon_profesor = self.profesor_salon.buscar_profesor_salones({
+                    'id_profesor': id_profesor,
+                    'id_salon': id_salon
+                })
+                if not salon_profesor:
+                    salon_disponibles.append({
+                        'id': id_salon,
+                        'Salones disponibles': grado_salon,
+                        'Nombre Salon' : nombre_salon
+                    })
+
+            print(print_table(salon_disponibles))
+            
+            salon_seleccionado = input_data(f'\nSeleccione el ID del salon a asignar al profesor: {profesor[1]} >> ', 'int')
+            buscar_salon = self.salon.obtener_salon({'id_salon': salon_seleccionado})
+            if not buscar_salon:
+                print('\nEste curso no existe !')
+                return
+            salon_profesor = self.profesor_salon.buscar_profesor_salones({
+                'id_profesor': id_profesor,
+                'id_salon': salon_seleccionado
+            })
+            if salon_profesor:
+                print('\nEste curso ya esta asignado al profesor !')
+                return
+            self.profesor_salon.guardar_profesor_salon({
+                'id_profesor': id_profesor,
+                'id_salon': salon_seleccionado
+            })
+            print('''
+                ==============================
+                    Nuevo salon asignado !
                 ==============================
             ''')
         

@@ -2,9 +2,11 @@ from classes.alumno import Alumno
 from helpers.menu import Menu
 from helpers.helper import print_table, input_data, pregunta
 
-class alumnos_controller():
+
+class Alumnos_controller():
     def __init__(self):
         self.alumno = Alumno()
+       
         self.salir = False
 
     def menu(self):
@@ -102,4 +104,7 @@ class alumnos_controller():
             Alumno Eliminado !
         ========================
         ''')
-
+        
+  
+     
+    

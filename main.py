@@ -1,11 +1,10 @@
 from helpers.menu import Menu
 from controllers.profesores_controller import Profesores_controller
 from controllers.cursos_controller import Cursos_controller
-<<<<<<< HEAD
-from controllers.alumnos_controller import alumnos_controller
-=======
+from controllers.alumnos_controller import Alumnos_controller
 from controllers.periodo_controller import Periodo_controller
->>>>>>> 0f9d3948475429dbe94709735b904987e0c6536e
+from controllers.salones_controller import Salones_controller
+from controllers.notas_controller import Notas_controller
 
 def iniciar_app():
     try:
@@ -22,7 +21,7 @@ def iniciar_app():
             if profesor.salir:
                 iniciar_app()
         elif respuesta == 2:
-            alumno = alumnos_controller()
+            alumno = Alumnos_controller()
             alumno.menu()
             if alumno.salir:
                 iniciar_app()
@@ -37,11 +36,17 @@ def iniciar_app():
             if periodo.salir:
                 iniciar_app()
         elif respuesta == 5:
-            pass
+            salon = Salones_controller()
+            salon.menu()
+            if salon.salir:
+                iniciar_app()
         elif respuesta == 6:
             pass
         elif respuesta == 7:
-            pass
+            notas = Notas_controller()
+            notas.menu()
+            if notas.salir:
+                iniciar_app() 
 
         print("\nGracias por utilizar el sistema\n")
     except KeyboardInterrupt:

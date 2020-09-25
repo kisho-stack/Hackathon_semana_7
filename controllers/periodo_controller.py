@@ -74,7 +74,7 @@ class Periodo_controller:
                         self.eliminar_periodo(id_periodo)
                     elif respuesta == 4:
                         self.aperturar_periodo(id_periodo)
-                    elif respuesta == 4:
+                    elif respuesta == 5:
                         self.cerrar_periodo(id_periodo)    
         except Exception as e:
             print(f'{str(e)}')
@@ -157,8 +157,8 @@ class Periodo_controller:
         print(f'\n Por favor elige el grado o salón para el que desea trabajar su malla curricular :')
         salon_seleccionado=[]
         salones_1=self.salon.obtener_salones('id_salon')
-        print(print_table(salones_1,['ID','Salón']))
-        id_salon_seleccionado = input_data("Seleccione el ID del salón a trabjar su malla: >> ", "int")
+        print(print_table(salones_1,['ID','Salón','Nombre del Salon']))
+        id_salon_seleccionado = input_data("Seleccione el ID del salón a trabajar su malla: >> ", "int")
         salon_seleccionado = self.salon.obtener_salon({'id_salon': id_salon_seleccionado})
         print(f'\n Creación de la malla curricular para el periodo : {periodo[1]} y salón: {salon_seleccionado[1]}')
         print(f'''
@@ -166,8 +166,9 @@ class Periodo_controller:
                 Malla curricular del Salón: {salon_seleccionado[1]}
             =======================================================
         ''')
-        malla_periodo = self.malla.buscar_mallas({'id_periodo': id_periodo,'id_salon': id_salon_seleccionado})
-        #print(print_table(malla_periodo, ['ID', 'ID_Periodo', 'ID_salon', 'ID_Profesor']))
+        #malla_periodo = self.malla.obtener_malla({'id_periodo': id_periodo,'id_salon': id_salon_seleccionado})
+        malla_periodo = self.malla.obtener_malla({'id_periodo': id_periodo,'id_salon': id_salon_seleccionado})
+        print(print_table(malla_periodo, ['ID', 'ID_Periodo', 'ID_salon', 'ID_Profesor']))
         mallas_imprimir = []        
         if malla_periodo:
             for v in malla_periodo:
